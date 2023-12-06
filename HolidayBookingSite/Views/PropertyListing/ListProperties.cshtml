@@ -1,0 +1,17 @@
+﻿@model IEnumerable<PropertyListingModel>
+
+@{
+    ViewBag.Title = "ListProperties";
+}
+
+@foreach (var property in Model)
+{
+    <div class="item">
+        <h4>@property.Name</h4>
+        <p>Blurb: @property.Blurb</p>
+        <p>Location: @property.Location</p>
+        <p>Cost per Night: @property.CostPerNight.ToString("c")</p>
+        <p>Number of Bedrooms: @property.NumberOfBedrooms.ToString("c")</p>
+    </div>
+}
+
