@@ -1,10 +1,23 @@
-﻿@model IEnumerable<PropertyListingModel>
+﻿@model PropertySearchModel
 
 @{
     ViewBag.Title = "ListProperties";
 }
 
-@foreach (var property in Model)
+@* <form asp-controller="PropertyListing" asp-action="ListAvailable" method="get">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="start" value="@ViewBag.StartDate?.ToString(" yyyy-MM-dd")" required>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="end" value="@ViewBag.EndDate?.ToString(" yyyy-MM-dd")" required>
+
+    <button type="submit">Search</button>
+</form> *@
+
+<partial name="_SearchMenu" for="SearchMenuModel"/>
+
+
+@foreach (var property in Model.Properties)
 {
     <div class="item">
         <h4>@property.Name</h4>

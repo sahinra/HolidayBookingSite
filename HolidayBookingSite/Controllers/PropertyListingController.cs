@@ -85,17 +85,39 @@ namespace HolidayBookingSite.Controllers
         };
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("ListAvailable");
         }
 
         public IActionResult ListAll()
         {
-            return View("ListProperties", properties);
+            return RedirectToAction("ListAvailable");
         }
 
         public IActionResult ListAvailable(DateTime start, DateTime end)
         {
-            return View("ListProperties", properties);
+            List<DateTime> range = new List<DateTime>((end - start).Days);
+            for (int i = 0; i < (end-start).Days; i++)
+            {
+                range.Add(start.AddDays(i));
+            }
+            var availableProperties = properties.Where(p => p.BookedDates.Intersect(range).Count() < 1);
+
+            var startDate = start.Year == 1 ? DateTime.Now : start;
+            var endDate = end.Year == 1 ? DateTime.Now : end;
+
+            var searchMenuModel = new SearchMenuModel
+            {
+                StartDate = startDate,
+                EndDate = endDate
+            };
+
+            var model = new PropertySearchModel
+            {
+                SearchMenuModel = searchMenuModel,
+                Properties = availableProperties
+            };
+
+            return View("ListProperties", model);
         }
 
         [HttpGet]
