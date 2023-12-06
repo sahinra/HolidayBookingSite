@@ -12,6 +12,7 @@
         <p>Location: @property.Location</p>
         <p>Cost per Night: @property.CostPerNight.ToString("c")</p>
         <p>Number of Bedrooms: @property.NumberOfBedrooms.ToString("c")</p>
+        <p><a asp-controller="PropertyListing" asp-action="ViewPropertyDetails" asp-route-id="@property.Id">View Details</a></p>
     </div>
 }
 
