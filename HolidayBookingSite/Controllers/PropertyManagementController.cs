@@ -1,4 +1,5 @@
-﻿using Domain.Repositories;
+﻿using Domain.Entities;
+using Domain.Repositories;
 using HolidayBookingSite.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,7 @@ namespace HolidayBookingSite.Controllers
             this.propertyRepository = propertyRepository;
         }
 
-        public IActionResult RegisterPropertyForm()
+        public IActionResult RegisterProperty()
         {
             return View();
         }
@@ -21,6 +22,19 @@ namespace HolidayBookingSite.Controllers
         [HttpPost]
         public IActionResult RegisterProperty(PropertyDetailsModel model)
         {
+            var newProperty = new Property
+            {
+                Name = model.Name,
+                Blurb = model.Blurb,
+                Location = model.Location,
+                NumberOfBedrooms = model.NumberOfBedrooms,
+                CostPerNight = model.CostPerNight,
+                Description = model.Description,
+                Amenities = model.Amenities,
+                BookedDates = model.BookedDates
+            };
+            propertyRepository.AddProperty(newProperty);
+
             return RedirectToAction("SuccessfullyRegistered");
         }
 
@@ -28,33 +42,5 @@ namespace HolidayBookingSite.Controllers
         {
             return View();
         }
-
-
-        //public IActionResult AddProperty(
-        //    int id,
-        //    string name,
-        //    string blurb,
-        //    string location,
-        //    int numberOfBedroom,
-        //    decimal costPerNight,
-        //    string description,
-        //    List<string> amendities,
-        //    List<DateTime> bookedDates)
-        //{
-        //    var newProperty = new PropertyDetailsModel
-        //    {
-        //        Id = id,
-        //        Name = name,
-        //        Blurb = blurb,
-        //        Location = location,
-        //        NumberOfBedrooms = numberOfBedroom,
-        //        CostPerNight = costPerNight,
-        //        Description = description,
-        //        Amenities = amendities,
-        //        BookedDates = bookedDates
-        //    };
-
-        //    return View(newProperty);
-        //}
     }
 }

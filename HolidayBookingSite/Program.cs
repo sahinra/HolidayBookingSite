@@ -44,9 +44,17 @@ namespace HolidayBookingSite
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapControllerRoute(
+            app.UseEndpoints(endpoints =>
+            {
+                app.MapControllerRoute(
+                    name: "propertyManagement",
+                    pattern: "{controller=PropertyManagement}/{action=RegisterProperty}/{id?}");
+
+                app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=PropertyListing}/{action=ListAll}/{id?}");
+            });
+
             app.MapRazorPages();
 
             app.Run();

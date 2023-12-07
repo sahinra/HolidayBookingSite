@@ -142,7 +142,7 @@ namespace HolidayBookingSite.Controllers
                 return NotFound();
             }
 
-            return View("ViewPropertyDetails", property);
+            return View("PropertyDetails", property);
         }
 
     }
