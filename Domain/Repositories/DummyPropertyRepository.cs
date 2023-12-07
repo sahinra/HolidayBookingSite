@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
-    internal class DummyPropertyRepository : IPropertiesRepository
+    internal class DummyPropertyRepository : IPropertyRepository
     {
         private static List<Property> properties = new()
         {

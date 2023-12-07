@@ -4,28 +4,13 @@
     ViewBag.Title = "ListProperties";
 }
 
-@* <form asp-controller="PropertyListing" asp-action="ListAvailable" method="get">
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" name="start" value="@ViewBag.StartDate?.ToString(" yyyy-MM-dd")" required>
-
-    <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" name="end" value="@ViewBag.EndDate?.ToString(" yyyy-MM-dd")" required>
-
-    <button type="submit">Search</button>
-</form> *@
-
 <partial name="_SearchMenu" for="SearchMenuModel"/>
 
-
-@foreach (var property in Model.Properties)
-{
-    <div class="item">
-        <h4>@property.Name</h4>
-        <p>Blurb: @property.Blurb</p>
-        <p>Location: @property.Location</p>
-        <p>Cost per Night: @property.CostPerNight.ToString("c")</p>
-        <p>Number of Bedrooms: @property.NumberOfBedrooms.ToString("c")</p>
-        <p><a asp-controller="PropertyListing" asp-action="ViewPropertyDetails" asp-route-id="@property.Id">View Details</a></p>
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        @foreach (var property in Model.Properties)
+        {
+            <partial name="_CardLayout" for="@property" />
+        }
     </div>
-}
-
+</div>

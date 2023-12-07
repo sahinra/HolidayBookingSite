@@ -103,7 +103,7 @@ namespace HolidayBookingSite.Controllers
             var availableProperties = properties.Where(p => p.BookedDates.Intersect(range).Count() < 1);
 
             var startDate = start.Year == 1 ? DateTime.Now : start;
-            var endDate = end.Year == 1 ? DateTime.Now : end;
+            var endDate = end.Year == 1 ? DateTime.Now.AddDays(7) : end;
 
             var searchMenuModel = new SearchMenuModel
             {
@@ -130,7 +130,7 @@ namespace HolidayBookingSite.Controllers
                 return NotFound();
             }
 
-            return View("PropertyDetails", property);
+            return View("ViewPropertyDetails", property);
         }
 
     }
