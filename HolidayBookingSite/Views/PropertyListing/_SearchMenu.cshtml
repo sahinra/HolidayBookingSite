@@ -1,11 +1,11 @@
-﻿@model SearchMenuModel
+﻿@model PropertySearchModel
 
 <form asp-controller="PropertyListing" asp-action="ListAvailable">
     <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" name="start" value="@Model.StartDate.ToString("yyyy-MM-dd")" required>
+    <input type="date" id="startDate" name="start" value="@Model.SearchMenuModel.StartDate.ToString("yyyy-MM-dd")" required>
 
     <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" name="end" value="@Model.EndDate.ToString("yyyy-MM-dd")" required>
+    <input type="date" id="endDate" name="end" value="@Model.SearchMenuModel.EndDate.ToString("yyyy-MM-dd")" required>
 
     <button type="submit">Search</button>
 </form>
@@ -13,7 +13,14 @@
 @section scripts {
     <script>
         $(function() {
+            var bookedDates = @Html.Raw(Json.Serialize(Model.Properties.SelectMany(p => p.BookedDates).Distinct()));
             $("#startDate, #endDate").datepicker();
+            $("#startDate, #endDate").datepicker({
+                beforeShowDay: function (date) {
+                    var dateString = $.datepicker.formatDate("yy-mm-dd", date);
+                    return [bookedDates.indexOf(dateString) === -1];
+                }
+            });
         });
     </script>
 }

@@ -5,26 +5,40 @@
 
 <h2>Property Details</h2>
 
-<div>
-    <h4>@Model.Name</h4>
-    <p>Location: @Model.Location</p>
-    <p>Number of Bedrooms: @Model.NumberOfBedrooms</p>
-    <p>Cost per Night: @Model.CostPerNight</p>
-    <p>Description: @Model.Description</p>
+<div class="col">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title">@Model.Name</h4>
+            <p class="card-text">Blurb: @Model.Blurb</p>
+            <p class="card-text">Location: @Model.Location</p>
+            <p class="card-text">Bedrooms: @Model.NumberOfBedrooms</p>
+            <p class="card-text">Cost per Night: @Model.CostPerNight</p>
+            <p>Description: @Model.Description</p>
 
-    <h4>Amenities:</h4>
-    <ul>
-        @foreach (var amenity in Model.Amenities)
-        {
-            <li>@amenity</li>
-        }
-    </ul>
+            <h4>Amenities:</h4>
+            <ul>
+                @foreach (var amenity in Model.Amenities)
+                {
+                    <li>@amenity</li>
+                }
+            </ul>
 
-    <h4>Booked Dates:</h4>
-    <ul>
-        @foreach (var bookedDate in Model.BookedDates)
-        {
-            <li>@bookedDate.ToShortDateString()</li>
-        }
-    </ul>
+            <h4>Booked Dates:</h4>
+            <ul>
+                @foreach (var bookedDate in Model.BookedDates)
+                {
+                    <li>@bookedDate.ToShortDateString()</li>
+                }
+            </ul>
+            @* <partial name="ViewPropertyDetails" for="PropertySearchModel" /> *@
+        </div>
+    </div>
 </div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+}

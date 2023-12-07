@@ -1,24 +1,26 @@
-﻿<h4> Property Details</h4>
+﻿@model PropertySearchModel
 
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">@Model.Name</h4>
-        <h4 class="card-subtitle mb-2 text-muted">Booking Calendar</h4>
-        <div class="input-group">
-            <input type="text" id="datepicker" class="form-control" placeholder="Select booking date">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">
-                    <i class="fas fa-calendar-alt"></i>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
+<form asp-controller="PropertyListing" asp-action="ListAvailable">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="start" value="@Model.SearchMenuModel.StartDate.ToString("yyyy-MM-dd")" required>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="end" value="@Model.SearchMenuModel.EndDate.ToString("yyyy-MM-dd")" required>
+
+    <button type="submit">Search</button>
+</form>
 
 @section scripts {
     <script>
         $(function () {
-            $("#datepicker").datepicker();
+            var bookedDates = @Html.Raw(Json.Serialize(Model.Properties.SelectMany(p => p.BookedDates).Distinct()));
+            $("#startDate, #endDate").datepicker();
+            $("#startDate, #endDate").datepicker({
+                beforeShowDay: function (date) {
+                    var dateString = $.datepicker.formatDate("yy-mm-dd", date);
+                    return [bookedDates.indexOf(dateString) === -1];
+                }
+            });
         });
     </script>
 }
