@@ -16,6 +16,10 @@ namespace Domain.Entities
         public decimal CostPerNight { get; set; }
         public string Description { get; set; }
         public List<string> Amenities { get; set; }
-        public List<DateTime> BookedDates { get; set; }
+        public List<BookedDates> BookedDates { get; set; }
+        public bool IsAvailable(DateTime start, DateTime end)
+        {
+            return !BookedDates.Any(b => start < b.EndDate && end > b.StartDate);
+        }
     }
 }

@@ -21,7 +21,22 @@ namespace Domain.Repositories
                 CostPerNight = 350,
                 Description = "Add your property description here",
                 Amenities = new List<string> { "Amenity 1", "Amenity 2", "Amenity 3" },
-                BookedDates = new List<DateTime> { new DateTime(2023, 1, 15), new DateTime(2023, 2, 20) }
+                BookedDates = new List<BookedDates>
+                {
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 1, 15), EndDate = new DateTime(2023, 2, 20)
+                    },
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 3, 6), EndDate = new DateTime(2023, 4, 17)
+                    },
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 5, 14), EndDate = new DateTime(2023, 7, 6)
+                    },
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 7, 20), EndDate = new DateTime(2023, 11, 11)
+                    }
+                }
+
             },
         new Property
             {
@@ -33,7 +48,12 @@ namespace Domain.Repositories
                 CostPerNight = 730,
                 Description = "Add your property description here",
                 Amenities = new List<string> { "Amenity 1", "Amenity 2", "Amenity 3" },
-                BookedDates = new List<DateTime> { new DateTime(2023, 2, 28), new DateTime(2023, 3, 20) }
+                BookedDates = new List<BookedDates>
+                {
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 1, 15), EndDate = new DateTime(2023, 2, 20)
+                    }
+                }
             },
         new Property
             {
@@ -45,7 +65,15 @@ namespace Domain.Repositories
                 CostPerNight = 730,
                 Description = "Add your property description here",
                 Amenities = new List<string> { "Amenity 1", "Amenity 2", "Amenity 3" },
-                BookedDates = new List<DateTime> { new DateTime(2023, 5, 15), new DateTime(2023, 5, 18) }
+                BookedDates = new List<BookedDates>
+                {
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 1, 15), EndDate = new DateTime(2023, 2, 20)
+                    },
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 1, 15), EndDate = new DateTime(2023, 2, 20)
+                    }
+                }
             },
         new Property
             {
@@ -57,7 +85,18 @@ namespace Domain.Repositories
                 CostPerNight = 500,
                 Description = "Add your property description here",
                 Amenities = new List<string> { "Amenity 1", "Amenity 2", "Amenity 3" },
-                BookedDates = new List<DateTime> { new DateTime(2023, 2, 13), new DateTime(2023, 3, 22) }
+                BookedDates = new List<BookedDates>
+                {
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 1, 15), EndDate = new DateTime(2023, 2, 20)
+                    },
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 3, 3), EndDate = new DateTime(2023, 4, 20)
+                    },
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 6, 2), EndDate = new DateTime(2023, 6, 4)
+                    }
+                }
             },
 
         new Property
@@ -70,7 +109,12 @@ namespace Domain.Repositories
                 CostPerNight = 250,
                 Description = "Add your property description here",
                 Amenities = new List<string> { "Amenity 1", "Amenity 2", "Amenity 3" },
-                BookedDates = new List<DateTime> { new DateTime(2023, 1, 10), new DateTime(2023, 1, 18) }
+                BookedDates = new List<BookedDates>
+                {
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 1, 1), EndDate = new DateTime(2023, 2, 25)
+                    }
+                }
             },
 
         new Property
@@ -83,7 +127,15 @@ namespace Domain.Repositories
                 CostPerNight = 600,
                 Description = "Add your property description here",
                 Amenities = new List<string> { "Amenity 1", "Amenity 2", "Amenity 3" },
-                BookedDates = new List<DateTime> { new DateTime(2023, 1, 6), new DateTime(2023, 1, 21) }
+                BookedDates = new List<BookedDates>
+                {
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 5, 15), EndDate = new DateTime(2023, 6, 20)
+                    },
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 7, 29), EndDate = new DateTime(2023, 8, 20)
+                    }
+                }
             },
         };
 

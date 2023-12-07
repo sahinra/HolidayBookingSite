@@ -31,7 +31,12 @@ namespace HolidayBookingSite.Controllers
                 CostPerNight = model.CostPerNight,
                 Description = model.Description,
                 Amenities = model.Amenities,
-                BookedDates = model.BookedDates
+                BookedDates = new List<BookedDates>
+                {
+                    new BookedDates {
+                        StartDate = new DateTime(2023, 5, 15), EndDate = new DateTime(2023, 6, 20)
+                    }
+                }
             };
             propertyRepository.AddProperty(newProperty);
 

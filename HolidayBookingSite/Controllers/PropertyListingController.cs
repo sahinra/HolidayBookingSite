@@ -1,4 +1,5 @@
-﻿using Domain.Repositories;
+﻿using Domain.Entities;
+using Domain.Repositories;
 using HolidayBookingSite.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -108,9 +109,12 @@ namespace HolidayBookingSite.Controllers
             {
                 range.Add(start.AddDays(i));
             }
+
             var properties = propertyRepository.GetProperties();
 
-            var availableProperties = properties.Where(p => p.BookedDates.Intersect(range).Count() < 1);
+            var availableProperties = properties.Where(p => p.IsAvailable(start, end)).ToList();
+
+            //var availableProperties = properties.Where(p => p.BookedDates.Intersect(range).Count() < 1);
 
             var startDate = start.Year == 1 ? DateTime.Now : start;
             var endDate = end.Year == 1 ? DateTime.Now.AddDays(7) : end;
@@ -130,7 +134,6 @@ namespace HolidayBookingSite.Controllers
             return View("ListProperties", model);
         }
 
-        [HttpGet]
         public IActionResult ViewPropertyDetails(int id)
         {
             var properties = propertyRepository.GetProperties();
@@ -143,6 +146,31 @@ namespace HolidayBookingSite.Controllers
             }
 
             return View("PropertyDetails", property);
+        }
+
+        public IActionResult AddBooking(int id, SearchMenuModel model)
+        {
+            var properties = propertyRepository.GetProperties();
+
+            var property = properties.Where(p => p.Id == id).FirstOrDefault();
+
+            if (property == null)
+            {
+                return NotFound();
+            }
+
+            property.BookedDates.Add(new BookedDates
+            {
+                StartDate = model.StartDate,
+                EndDate = model.EndDate
+            });
+
+            return RedirectToAction("SuccessfullyBooked");
+        }
+
+        public IActionResult SuccessfullyBooked()
+        {
+            return View();
         }
 
     }

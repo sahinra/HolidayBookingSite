@@ -1,6 +1,6 @@
 ﻿@model Domain.Entities.Property
 @{
-    ViewBag.Title = "Product Details";
+    ViewBag.Title = "Property Details";
 }
 
 <h2>Property Details</h2>
@@ -27,18 +27,49 @@
             <ul>
                 @foreach (var bookedDate in Model.BookedDates)
                 {
-                    <li>@bookedDate.ToShortDateString()</li>
+                    <li>@bookedDate.StartDate.ToShortDateString() - @bookedDate.EndDate.ToShortDateString()</li>
                 }
             </ul>
-            @* <partial name="ViewPropertyDetails" for="PropertySearchModel" /> *@
+
+
+
+
+            <form asp-controller="PropertyListing" asp-action="AddBooking">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="start" value="SearchMenuModel.StartDate.ToString("yyyy-MM-dd")" required>
+
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="end" value="SearchMenuModel.EndDate.ToString("yyyy-MM-dd")" required>
+
+                <button type="submit">Book Dates</button>
+            </form>
+
+            @section scripts {
+                <script>
+                    $(function () {
+                        var bookedDates = @Html.Raw(Json.Serialize(Model.BookedDates.SelectMany(b => new[] { b.StartDate, b.EndDate }).Distinct()));
+                        $("#startDate, #endDate").datepicker();
+                        $("#startDate, #endDate").datepicker({
+                            beforeShowDay: function (date) {
+                                var dateString = $.datepicker.formatDate("yy-mm-dd", date);
+                                return [bookedDates.indexOf(dateString) === -1];
+                            }
+                        });
+                    });
+                </script>
+            }
+
+
+            @* <partial name="ViewPropertyDetails" for="SearchMenuModel" /> *@
         </div>
     </div>
 </div>
 
-@section scripts {
+@* @section scripts {
     <script>
         $(function () {
             $("#datepicker").datepicker();
         });
     </script>
-}
+} *@
