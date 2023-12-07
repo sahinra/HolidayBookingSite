@@ -1,8 +1,10 @@
-﻿namespace HolidayBookingSite.Models
+﻿using Domain.Entities;
+
+namespace HolidayBookingSite.Models
 {
     public class PropertySearchModel
     {
-        public IEnumerable<PropertyListingModel> Properties { get; set; }
+        public IEnumerable<Property> Properties { get; set; }
         public SearchMenuModel SearchMenuModel { get; set; }
     }
 }

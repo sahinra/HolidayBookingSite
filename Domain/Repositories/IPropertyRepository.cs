@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
-    internal interface IPropertyRepository
+    public interface IPropertyRepository
     {
-        IEnumerable<Property> Properties { get; }
+        IEnumerable<Property> GetProperties();
+        void AddProperty(Property property);
+        //IEnumerable<Property> Properties { get; }
     }
 }
